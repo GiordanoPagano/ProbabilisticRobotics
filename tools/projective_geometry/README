@@ -1,0 +1,35 @@
+Added examples for epipolar on unit sphere
+epipiolar_unit_sphere.m:      generic utilities (triangulation, essential, 8pt)
+test_epipiolar_unit_sphere.m  test functions
+
+To use:
+$> octave-cli
+octave> pkg load statistics
+octave> source "test_epipolar_unit_sphere.m"
+
+1. generate a transform
+octave> X=generateTransform();
+
+2. test point triangulation
+octave> X=testTriangulatePoints(X, 10);
+
+This generates 10 points, projects them, in the origin and in a
+camera in X, and from the projections computes the positions
+of the points in the world
+
+3. testing essential
+
+octave> X=testEssential(X, 100);
+
+This generates 100 points, projects w.r.t origin and X,
+and from the projections recovers the essential matrix
+using the overloaded 8 pt alg.
+
+4. test_transform
+
+octave> X=testTransform(X, 100, 0.001);
+This makes the same as above, but extracts the transform
+from the computes essential
+Beware that noise_level is on the unit sphere, so it should be
+small to be meaningful
+
